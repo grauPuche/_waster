@@ -9,6 +9,9 @@ function draw() {
 	background(220);
 	// console.log(paper);
 	// console.log(keyNumber);
+	fill(150)
+	rect(width/3,-paper, 200, -paper*5);
+
 	}
 
 function keyTyped() {
