@@ -10,7 +10,7 @@ function draw() {
 	// console.log(paper);
 	// console.log(keyNumber);
 	fill(150)
-	rect(width/3,-paper, 200, -paper*5);
+	rect(width/3,paper, 200, -paper*5);
 
 	}
 
