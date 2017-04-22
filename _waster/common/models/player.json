@@ -1,0 +1,31 @@
+{
+  "name": "player",
+  "plural": "Players",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "GUID": {
+      "type": "string",
+      "required": true
+    },
+    "LocationX": {
+      "type": "number",
+      "required": true
+    },
+    "LocationY": {
+      "type": "number",
+      "required": true
+    },
+    "LastCheck": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
