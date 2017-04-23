@@ -60,7 +60,7 @@ $(function () {
     requestAnimFrame(animate);
 
     // load assets    
-    playerTexture = PIXI.Texture.fromImage("assets/" + CHOSEN BY THE PLAYER + ".png"); // hand texture
+    playerTexture = PIXI.Texture.fromImage("assets/" + HAND_COLOR_CHOSEN_BY_THE_PLAYER + ".png"); // hand texture
 
     // enter the game and setup worker
     requestEnterGame();
