@@ -1,0 +1,61 @@
+{
+  "name": "player",
+  "plural": "players",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "GUID": {
+      "type": "string",
+      "required": true
+    },
+    "keyValue": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "pageNumber": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "finished": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "ready": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "handColor": {
+      "type": [
+        "string"
+      ],
+      "required": true,
+      "default": [
+        "blue"
+      ]
+    },
+    "timeOver": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "playerName": {
+      "type": "string",
+      "required": true
+    },
+    "lastCheck": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
