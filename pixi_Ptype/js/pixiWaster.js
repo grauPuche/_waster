@@ -1,63 +1,75 @@
 // - - - - - - - - - - - * greeting * - - - - - - - - - - -\\
 
 var type = "WebGL"
-if(!PIXI.utils.isWebGLSupported()){
+if (!PIXI.utils.isWebGLSupported()) {
 	type = "canvas"
 }
 PIXI.utils.sayHello(type)
 
+// - - - - - - - - - - - * stage * - - - - - - - - - - -\\
+
+var Container = PIXI.Container,
+	autoDetectRenderer = PIXI.autoDetectRenderer,
+	loader = PIXI.loader,
+	resources = PIXI.loader.resources,
+	Sprite = PIXI.Sprite;
 
 // - - - - - - - - - - - * stage * - - - - - - - - - - -\\
 
 
 //Create the renderer
-var renderer = PIXI.autoDetectRenderer(1250, 800);
+var renderer = autoDetectRenderer(1250, 800);
 //Add the canvas to the HTML document
 document.body.appendChild(renderer.view);
 //Create a container object called the `stage`
-var stage = new PIXI.Container();
+var stage = new Container();
 //Tell the `renderer` to `render` the `stage`
 renderer.render(stage);
 
 // - - - - - - - - - - - * loader * - - - - - - - - - - - \\
 
-PIXI.loader
-	.add([
-		"assets/hand/blue.png",
-		"assets/hand/red.png",
-		"assets/hand/pink.png",
-		"assets/hand/yellow.png",
-		"assets/paper/bills.png"
-	])
+loader
+	.add("blueHandTexture","assets/hand/blue.png")
+	.add("redHandTexture","assets/hand/red.png")
+	.add("pinkHandTexture","assets/hand/pink.png")
+	.add("yellowHandTexture","assets/hand/yellow.png")
+	.add("paperTexture","assets/paper/bill.png")
+	
+	.on("progress", loadProgressHandler)
 	.load(setup);
+
+function loadProgressHandler() {
+	console.log("loading"); 
+}
 
 // * * * * * * * * * * *  SETUP  * * * * * * * * * * * * * \\
 
 function setup() {
 
-// - - - - - - - - - - - * textures * - - - - - - - - - - -\\
+	// - - - - - - - - - - - * textures * - - - - - - - - - - -\\
 
-//HAND textures
-var blueHandTexture		= PIXI.loader.resources["assets/hand/blue.png"].texture;
-var redHandTexture		= PIXI.loader.resources["assets/hand/red.png"].texture;
-var pinkHandTexture		= PIXI.loader.resources["assets/hand/pink.png"].texture;
-var yellowHandTexture	= PIXI.loader.resources["assets/hand/yellow.png"].texture;
+	//HAND textures
+	var blueHandTexture = resources.blueHandTexture.texture;
+	var redHandTexture = resources.redHandTexture.texture;
+	var pinkHandTexture = resources.pinkHandTexture.texture;
+	var yellowHandTexture = resources.yellowHandTexture.texture;
 
-//PAPER texture
-var paperTexture		= PIXI.loader.resources["assets/paper/bill.png"].texture;
+	//PAPER texture
+	var paperTexture = resources.paperTexture.texture;
 
-// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
+	// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
 
-var hand = new PIXI.Sprite(blueHandTexture);
+	var hand = new Sprite(blueHandTexture);
 
-// - - - - - - - - * adding to the stage * - - - - - - - -\\
+	// - - - - - - - - * adding to the stage * - - - - - - - -\\
 
-stage.addChild(hand);
-
-
-// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
+	stage.addChild(hand);
 
 
+	// - - - - - - - - - - - * rendering stage * - - - - - - - - - - -\\
+
+	renderer.render(stage);
+}
 
 // - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
 
