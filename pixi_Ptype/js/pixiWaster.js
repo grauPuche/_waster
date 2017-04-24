@@ -13,6 +13,7 @@ var Container = PIXI.Container,
 	loader = PIXI.loader,
 	resources = PIXI.loader.resources,
 	Sprite = PIXI.Sprite;
+	Rectangle = PIXI.Rectangle;
 
 // - - - - - - - - - - - * stage * - - - - - - - - - - -\\
 
@@ -38,13 +39,17 @@ loader
 	.on("progress", loadProgressHandler)
 	.load(setup);
 
-function loadProgressHandler() {
-	console.log("loading"); 
+function loadProgressHandler(loader, resource) {
+
+	console.log("loading: " + resource.name);
+	console.log("progress: " + loader.progress + "%");
 }
 
 // * * * * * * * * * * *  SETUP  * * * * * * * * * * * * * \\
 
 function setup() {
+
+	console.log("All files loaded");
 
 	// - - - - - - - - - - - * textures * - - - - - - - - - - -\\
 
@@ -58,22 +63,46 @@ function setup() {
 	var paperTexture = resources.paperTexture.texture;
 
 	// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
+	
+	var Frame1 = new Rectangle(0,0,96,96);
+	var Frame2 = new Rectangle(96,0,96,96);
+	var Frame3 = new Rectangle(192,0,96,96);
+	var Frame4 = new Rectangle(288,0,96,96);
+	var Frame5 = new Rectangle(384,0,96,96);
+	var Frame6 = new Rectangle(480,0,96,96);
+	var Frame7 = new Rectangle(576,0,96,96);
+	var Frame8 = new Rectangle(672,0,96,96);
+	var Frame9 = new Rectangle(786,0,96,96);
+	var Frame10 = new Rectangle(864,0,96,96);
+	var Frame11 = new Rectangle(960,0,96,96);
+	var Frame12 = new Rectangle(1056,0,96,96);
+	var Frame13 = new Rectangle(1152,0,96,96);
+	var Frame14 = new Rectangle(1248,0,96,96);
+	var Frame15 = new Rectangle(1344,0,96,96);
+	var Frame16 = new Rectangle(1440,0,96,96);
+	blueHandTexture.frame = Frame6; 
 
 	var hand = new Sprite(blueHandTexture);
 
+	// - - - - - - - - - - - * position * - - - - - - - - - - -\\
+
+	hand.x = 375;
+	hand.y = 304;
+
 	// - - - - - - - - * adding to the stage * - - - - - - - -\\
-
 	stage.addChild(hand);
-
-
 	// - - - - - - - - - - - * rendering stage * - - - - - - - - - - -\\
+}
+
+// - - - - - - - - - - - * GAMELOOP * - - - - - - - - - - -\\
+
+function gameloop (){
+	requestAnimationFrame(gameloop);
+
+	paper.x= 1;
 
 	renderer.render(stage);
 }
-
-// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
-
-
 
 // - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
 
