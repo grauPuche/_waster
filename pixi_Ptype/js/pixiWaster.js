@@ -45,6 +45,10 @@ function loadProgressHandler(loader, resource) {
 	console.log("progress: " + loader.progress + "%");
 }
 
+
+var paper;
+var hand;
+
 // * * * * * * * * * * *  SETUP  * * * * * * * * * * * * * \\
 
 function setup() {
@@ -64,42 +68,52 @@ function setup() {
 
 	// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
 	
-	var Frame1 = new Rectangle(0,0,96,96);
-	var Frame2 = new Rectangle(96,0,96,96);
-	var Frame3 = new Rectangle(192,0,96,96);
-	var Frame4 = new Rectangle(288,0,96,96);
-	var Frame5 = new Rectangle(384,0,96,96);
-	var Frame6 = new Rectangle(480,0,96,96);
-	var Frame7 = new Rectangle(576,0,96,96);
-	var Frame8 = new Rectangle(672,0,96,96);
-	var Frame9 = new Rectangle(786,0,96,96);
-	var Frame10 = new Rectangle(864,0,96,96);
-	var Frame11 = new Rectangle(960,0,96,96);
-	var Frame12 = new Rectangle(1056,0,96,96);
-	var Frame13 = new Rectangle(1152,0,96,96);
-	var Frame14 = new Rectangle(1248,0,96,96);
-	var Frame15 = new Rectangle(1344,0,96,96);
-	var Frame16 = new Rectangle(1440,0,96,96);
-	blueHandTexture.frame = Frame6; 
+	var frame1  = new Rectangle(0,0,96,96);
+	var frame2  = new Rectangle(96,0,96,96);
+	var frame3  = new Rectangle(192,0,96,96);
+	var frame4  = new Rectangle(288,0,96,96);
+	var frame5  = new Rectangle(384,0,96,96);
+	var frame6  = new Rectangle(480,0,96,96);
+	var frame7  = new Rectangle(576,0,96,96);
+	var frame8  = new Rectangle(672,0,96,96);
+	var frame9  = new Rectangle(786,0,96,96);
+	var frame10 = new Rectangle(864,0,96,96);
+	var frame11 = new Rectangle(960,0,96,96);
+	var frame12 = new Rectangle(1056,0,96,96);
+	var frame13 = new Rectangle(1152,0,96,96);
+	var frame14 = new Rectangle(1248,0,96,96);
+	var frame15 = new Rectangle(1344,0,96,96);
+	var frame16 = new Rectangle(1440,0,96,96);
 
-	var hand = new Sprite(blueHandTexture);
+	blueHandTexture.frame = frame6; 
+
+	paperTexture.frame = frame7
+
+	hand = new Sprite(blueHandTexture);
+	paper = new Sprite(paperTexture);
 
 	// - - - - - - - - - - - * position * - - - - - - - - - - -\\
 
 	hand.x = 375;
 	hand.y = 304;
 
+	paper.x = 375;
+	paper.y = 400
+
 	// - - - - - - - - * adding to the stage * - - - - - - - -\\
 	stage.addChild(hand);
-	// - - - - - - - - - - - * rendering stage * - - - - - - - - - - -\\
+	stage.addChild(paper);
+
+	gameLoop();
+
 }
 
 // - - - - - - - - - - - * GAMELOOP * - - - - - - - - - - -\\
 
-function gameloop (){
-	requestAnimationFrame(gameloop);
+function gameLoop (){
+	requestAnimationFrame(gameLoop);
 
-	paper.x= 1;
+	paper.x += 5;
 
 	renderer.render(stage);
 }
