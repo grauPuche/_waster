@@ -19,14 +19,47 @@ var stage = new PIXI.Container();
 //Tell the `renderer` to `render` the `stage`
 renderer.render(stage);
 
+// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
+
+PIXI.loader
+	.add([
+		"assets/hand/blue.png",
+		"assets/hand/red.png",
+		"assets/hand/pink.png",
+		"assets/hand/yellow.png",
+		"assets/paper/bills.png"
+	])
+	.load(setup);
+
 // - - - - - - - - - - - * textures * - - - - - - - - - - -\\
 
-//loading HAND textures
-PIXI.utils.TextureCache["assets/hand/blue.png"];
-PIXI.utils.TextureCache["assets/hand/red.png"];
-PIXI.utils.TextureCache["assets/hand/pink.png"];
-PIXI.utils.TextureCache["assets/hand/yellow.png"];
+//HAND textures
+var blueHandTexture = PIXI.utils.TextureCache["assets/hand/blue.png"];
+var redHandTexture = PIXI.utils.TextureCache["assets/hand/red.png"];
+var pinkHandTexture = PIXI.utils.TextureCache["assets/hand/pink.png"];
+var yellowHandTexture = PIXI.utils.TextureCache["assets/hand/yellow.png"];
 
-//loading PAPER texture
-PIXI.utils.TextureCache["assets/paper/bill.png"];
+//PAPER texture
+var paperTexture = PIXI.utils.TextureCache["assets/paper/bill.png"];
 
+// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
+
+var hand = new PIXI.Sprite(blueHandTexture);
+
+// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
+
+
+
+// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
+
+
+
+// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
+
+
+
+// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
+
+
+
+// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
