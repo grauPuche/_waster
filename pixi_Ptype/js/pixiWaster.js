@@ -13,7 +13,7 @@ var Container = PIXI.Container,
 	loader = PIXI.loader,
 	resources = PIXI.loader.resources,
 	Sprite = PIXI.Sprite;
-	Rectangle = PIXI.Rectangle;
+Rectangle = PIXI.Rectangle;
 
 // - - - - - - - - - - - * stage * - - - - - - - - - - -\\
 
@@ -27,11 +27,13 @@ var stage = new Container();
 //Tell the `renderer` to `render` the `stage`
 renderer.render(stage);
 
+var leftPile = new Container();
+
 // - - - - - - - - - - - * loader * - - - - - - - - - - - \\
 
 loader
 	.add('assets/spriteSheet.json')
-	
+
 	.on("progress", loadProgressHandler)
 	.load(setup);
 
@@ -46,7 +48,7 @@ var paper;
 var hand;
 
 var animHand;
-var animPaper;
+//var animPaper;
 
 // * * * * * * * * * * *  SETUP  * * * * * * * * * * * * * \\
 
@@ -67,28 +69,28 @@ function setup() {
 
 	var handFrames = [];
 
-    for (var i = 1; i < 7; i++) {
-        var val = i < 10 ? '0' + i : i;
+	for (var i = 0; i < 7; i++) {
+		var val = i < 10 ? '0' + i : i;
 
-        // magically works since the spritesheet was loaded with the pixi loader
-        handFrames.push(PIXI.Texture.fromFrame('hand/blue/blue' + val + '.png'));
+		// magically works since the spritesheet was loaded with the pixi loader
+		handFrames.push(PIXI.Texture.fromFrame('blue/blue' + val + '.png'));
 
 		console.log("hand texture loop done");
-    }
+	}
 
 	var paperFrames = [];
 
-    for (var i = 0; i < 16; i++) {
-        var val = i < 10 ? '0' + i : i;
+	for (var i = 1; i < 17; i++) {
+		var val = i < 10 ? '0' + i : i;
 
-        // magically works since the spritesheet was loaded with the pixi loader
-        paperFrames.push(PIXI.Texture.fromFrame('paper/bill' + val + '.png'));
+		// magically works since the spritesheet was loaded with the pixi loader
+		paperFrames.push(PIXI.Texture.fromFrame('bill' + val + '.png'));
 
 		console.log("paper texture loop done");
-    }
+	}
 
 	// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
-	
+
 	// var frame1  = new Rectangle(0,0,96,96);
 	// var frame2  = new Rectangle(96,0,96,96);
 	// var frame3  = new Rectangle(192,0,96,96);
@@ -111,11 +113,12 @@ function setup() {
 	//paperTexture.frame = frame7
 
 	//hand = new Sprite(blueHandTexture);
-	paper = new Sprite(PIXI.Texture.fromFrame('paper/bill00.png'));
+	paper = new Sprite(PIXI.Texture.fromFrame('bill00.png'));
+	paperPile = new Sprite(PIXI.Texture.fromFrame('paperPile.png'))
 
 	animHand = new PIXI.extras.AnimatedSprite(handFrames);
 	animPaper = new PIXI.extras.AnimatedSprite(paperFrames);
-	animHand.animationSpeed = 0.25;
+	animHand.animationSpeed = .75;
 	animPaper.animationSpeed = 0.25;
 	animPaper.loop = false;
 	animHand.loop = false;
@@ -125,51 +128,144 @@ function setup() {
 	// - - - - - - - - - - - * position * - - - - - - - - - - -\\
 
 	animHand.x = 375;
-	animHand.y = 304;
+	animHand.y = 300;
+
 	animPaper.x = 375;
-	animPaper.y = 304;
-	
+	animPaper.y = 313;
+
 	paper.x = 375;
-	paper.y = 304
+	paper.y = 304;
+
+	paperPile.x = 375;
+	paperPile.y = 400;
 
 	console.log("position done");
+
 	// - - - - - - - - * adding to the stage * - - - - - - - -\\
-	
-	stage.addChild(paper);
-	//stage.addChild(hand);
-	stage.addChild(animHand);
-	stage.addChild(animPaper);
+
+	leftPile.addChild(paper);
+	//leftPile.addChild(hand);
+	leftPile.addChild(animPaper);
+	leftPile.addChild(animHand);
+	leftPile.addChild(paperPile);
+
+	stage.addChild(leftPile);
 
 	console.log("Children done");
 
-	gameLoop(); 
+	//space.press = onClick();
+
+	gameLoop();
 
 	console.log("set up done");
+	
+	
 
 }
 
 // * * * * * * * * * * * * GAMELOOP * * * * * * * * * * * * * \\
 
-function gameLoop (){
+function gameLoop() {
 
 	requestAnimationFrame(gameLoop);
-	animHand.play();
-	animPaper.visible = false;
-
-animHand.onComplete = function(){
-	paper.visible = false;
-	animPaper.visible = true;
-	animPaper.x += 30;
-	animPaper.play();
-}
-
+		
+	//onClick();
 	
+	if (isAnimationStart === true){
+		//paperMovementX+=0.4;
+		animPaper.x += 5;
+
+		if (animPaper.x > 1200) {
+			resetPaper();
+		}
+	} 
 
 	renderer.render(stage);
 }
 
+function resetPaper()
+{
+	paperMovementX = 0;
+	isAnimationStart = false;
+	animPaper.x = 375;
+	animPaper.y = 313; 
+}
+
+var paperOrigin;
+var isAnimationStart = false;
+var paperMovementX = 0;
+
+// function onClick() {
+// 	animHand.play();
+// 	animHand.goToAndStop = 0;
+// 	//animPaper.visible = false;
+// 	//animPaper.alpha = 0;
+// 	animHand.onComplete = function (){
+// 		leftPile.y += 4; 
+// 	};
+
+// 		animPaper.play();
+// 		isAnimationStart = true;
+
+// };
+
 // - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
 
 
 
-// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
+// - - - - - - - - - - - * keyboard * - - - - - - - - - - -\\
+
+// var space = keyboard(32);
+
+// function keyboard(keyCode) {
+//   var key = {};
+//   key.code = keyCode;
+//   key.isDown = false;
+//   key.isUp = true;
+//   key.press = undefined;
+//   key.release = undefined;
+//   //The `downHandler`
+//   key.downHandler = function(event) {
+//     if (event.keyCode === key.code) {
+//       if (key.isUp && key.press) key.press();
+//       key.isDown = true;
+//       key.isUp = false;
+//     }
+//     event.preventDefault();
+//   };
+
+//   //The `upHandler`
+//   key.upHandler = function(event) {
+//     if (event.keyCode === key.code) {
+//       if (key.isDown && key.release) key.release();
+//       key.isDown = false;
+//       key.isUp = true;
+//     }
+//     event.preventDefault();
+//   };
+
+//   //Attach event listeners
+//   window.addEventListener(
+//     "keydown", key.downHandler.bind(key), false
+//   );
+//   window.addEventListener(
+//     "keyup", key.upHandler.bind(key), false
+//   );
+//   return key;
+// }
+
+function keyTyped() {
+	if (key === 'f') {
+		animHand.play();
+		animHand.goToAndStop = 0;
+		//animPaper.visible = false;
+		//animPaper.alpha = 0;
+		animHand.onComplete = function () {
+			leftPile.y += 4;
+		};
+
+		animPaper.play();
+		isAnimationStart = true;
+
+	}
+};
