@@ -6,39 +6,38 @@ if (!PIXI.utils.isWebGLSupported()) {
 }
 PIXI.utils.sayHello(type)
 
-// - - - - - - - - - - - * stage * - - - - - - - - - - -\\
+// - - - - - - - - - - - * nickNames * - - - - - - - - - - -\\
 
 var Container = PIXI.Container,
 	autoDetectRenderer = PIXI.autoDetectRenderer,
 	loader = PIXI.loader,
 	resources = PIXI.loader.resources,
-	Sprite = PIXI.Sprite;
-Rectangle = PIXI.Rectangle;
+	Sprite = PIXI.Sprite,
+	Rectangle = PIXI.Rectangle,
+	Text = PIXI.Text;
 
-// - - - - - - - - - - - * stage * - - - - - - - - - - -\\
+// - - - - - - - - - - - * stages & renderer * - - - - - - - - - - -\\
 
 
-//Create the renderer
 var renderer = autoDetectRenderer(1250, 800);
-//Add the canvas to the HTML document
 document.body.appendChild(renderer.view);
-//Create a container object called the `stage`
+
 var stage = new Container();
-//Tell the `renderer` to `render` the `stage`
 renderer.render(stage);
 
 var leftPile = new Container();
+
+renderer.backgroundColor = 0x282828;
+
 
 // - - - - - - - - - - - * loader * - - - - - - - - - - - \\
 
 loader
 	.add('assets/spriteSheet.json')
-
 	.on("progress", loadProgressHandler)
 	.load(setup);
 
 function loadProgressHandler(loader, resource) {
-
 	console.log("loading: " + resource.name);
 	console.log("progress: " + loader.progress + "%");
 }
@@ -46,11 +45,16 @@ function loadProgressHandler(loader, resource) {
 
 var paper;
 var hand;
-
 var animHand;
 //var animPaper;
+var message;
 
-// * * * * * * * * * * *  SETUP  * * * * * * * * * * * * * \\
+var paperFrames = [];
+var handFrames = [];
+
+
+// * * * * * * * * * * * * *  SETUP  * * * * * * * * * * * * * \\
+
 
 function setup() {
 
@@ -59,79 +63,63 @@ function setup() {
 	// - - - - - - - - - - - * textures * - - - - - - - - - - -\\
 
 	//HAND textures
-	// var blueHandTexture = resources.blueHandTexture.texture;
-	// var redHandTexture = resources.redHandTexture.texture;
-	// var pinkHandTexture = resources.pinkHandTexture.texture;
-	// var yellowHandTexture = resources.yellowHandTexture.texture;
-
-	//PAPER texture
-	// var paperTexture = resources.paperTexture.texture;
-
-	var handFrames = [];
-
-	for (var i = 0; i < 7; i++) {
+	for (var i = 0; i < 8; i++) {
 		var val = i < 10 ? '0' + i : i;
-
-		// magically works since the spritesheet was loaded with the pixi loader
 		handFrames.push(PIXI.Texture.fromFrame('blue/blue' + val + '.png'));
-
-		console.log("hand texture loop done");
+		//console.log("setup: hand texture loop done");
 	}
-
-	var paperFrames = [];
-
+	//PAPER textures
 	for (var i = 1; i < 17; i++) {
 		var val = i < 10 ? '0' + i : i;
-
-		// magically works since the spritesheet was loaded with the pixi loader
 		paperFrames.push(PIXI.Texture.fromFrame('bill' + val + '.png'));
-
-		console.log("paper texture loop done");
+		//console.log("setup: paper texture loop done");
 	}
+
+	console.log("setup: textures ready")
 
 	// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
 
-	// var frame1  = new Rectangle(0,0,96,96);
-	// var frame2  = new Rectangle(96,0,96,96);
-	// var frame3  = new Rectangle(192,0,96,96);
-	// var frame4  = new Rectangle(288,0,96,96);
-	// var frame5  = new Rectangle(384,0,96,96);
-	// var frame6  = new Rectangle(480,0,96,96);
-	// var frame7  = new Rectangle(576,0,96,96);
-	// var frame8  = new Rectangle(672,0,96,96);
-	// var frame9  = new Rectangle(786,0,96,96);
-	// var frame10 = new Rectangle(864,0,96,96);
-	// var frame11 = new Rectangle(960,0,96,96);
-	// var frame12 = new Rectangle(1056,0,96,96);
-	// var frame13 = new Rectangle(1152,0,96,96);
-	// var frame14 = new Rectangle(1248,0,96,96);
-	// var frame15 = new Rectangle(1344,0,96,96);
-	// var frame16 = new Rectangle(1440,0,96,96);
-
-	//blueHandTexture.frame = frame6; 
-
-	//paperTexture.frame = frame7
-
-	//hand = new Sprite(blueHandTexture);
 	paper = new Sprite(PIXI.Texture.fromFrame('bill00.png'));
 	paperPile = new Sprite(PIXI.Texture.fromFrame('paperPile.png'))
 
 	animHand = new PIXI.extras.AnimatedSprite(handFrames);
-	animPaper = new PIXI.extras.AnimatedSprite(paperFrames);
-	animHand.animationSpeed = .75;
-	animPaper.animationSpeed = 0.25;
-	animPaper.loop = false;
+	//animPaper = new PIXI.extras.AnimatedSprite(paperFrames);
+	animHand.animationSpeed = .35;
+	//animPaper.animationSpeed = 0.25;
+	//animPaper.loop = false;
 	animHand.loop = false;
 
-	console.log("sprites set");
+	console.log("setup: sprites set");
+
+	Fghj = new Text(
+		"F",
+		{ fontFamily: "tungsten", fontSize: 64, fill: "gray" }
+	);
+	fGhj = new Text(
+		"G",
+		{ fontFamily: "tungsten", fontSize: 64, fill: "gray" }
+	);
+	fgHj = new Text(
+		"H",
+		{ fontFamily: "tungsten", fontSize: 64, fill: "gray" }
+	);
+	fghJ = new Text(
+		"J",
+		{ fontFamily: "tungsten", fontSize: 64, fill: "gray" }
+	);
+
+	dollarsLeft = new Text(
+		dollars,
+		{ fontFamily: "tungsten", fontSize: 64, fill: "white" }
+	);
 
 	// - - - - - - - - - - - * position * - - - - - - - - - - -\\
 
 	animHand.x = 375;
 	animHand.y = 300;
 
-	animPaper.x = 375;
-	animPaper.y = 313;
+	//animPaper.x = 375;
+	//animPaper.y = 313;
 
 	paper.x = 375;
 	paper.y = 304;
@@ -139,28 +127,32 @@ function setup() {
 	paperPile.x = 375;
 	paperPile.y = 400;
 
-	console.log("position done");
+	Fghj.position.set(50, 50);
+	fGhj.position.set(100, 50);
+	fgHj.position.set(150, 50);
+	fghJ.position.set(200, 50);
+	dollarsLeft.position.set(260,700);
+	console.log("setup: position done");
 
 	// - - - - - - - - * adding to the stage * - - - - - - - -\\
 
 	leftPile.addChild(paper);
 	//leftPile.addChild(hand);
-	leftPile.addChild(animPaper);
+	//leftPile.addChild(animPaper);
 	leftPile.addChild(animHand);
 	leftPile.addChild(paperPile);
-
 	stage.addChild(leftPile);
+	stage.addChild(Fghj);
+	stage.addChild(fGhj);
+	stage.addChild(fgHj);
+	stage.addChild(fghJ);
+	stage.addChild(dollarsLeft);
 
-	console.log("Children done");
-
-	//space.press = onClick();
+	console.log("setup: children done");
 
 	gameLoop();
 
-	console.log("set up done");
-	
-	
-
+	console.log("setup: complete");
 }
 
 // * * * * * * * * * * * * GAMELOOP * * * * * * * * * * * * * \\
@@ -168,104 +160,99 @@ function setup() {
 function gameLoop() {
 
 	requestAnimationFrame(gameLoop);
-		
-	//onClick();
-	
-	if (isAnimationStart === true){
-		//paperMovementX+=0.4;
-		animPaper.x += 5;
 
-		if (animPaper.x > 1200) {
-			resetPaper();
+	dollarsLeft.text = dollars;
+
+	if (papers.length > 0) {
+		for (var i = 0; i < papers.length; i++) {
+			papers[i].x += 5;
 		}
-	} 
+	}
 
 	renderer.render(stage);
-}
-
-function resetPaper()
-{
-	paperMovementX = 0;
-	isAnimationStart = false;
-	animPaper.x = 375;
-	animPaper.y = 313; 
 }
 
 var paperOrigin;
 var isAnimationStart = false;
 var paperMovementX = 0;
 
-// function onClick() {
-// 	animHand.play();
-// 	animHand.goToAndStop = 0;
-// 	//animPaper.visible = false;
-// 	//animPaper.alpha = 0;
-// 	animHand.onComplete = function (){
-// 		leftPile.y += 4; 
-// 	};
-
-// 		animPaper.play();
-// 		isAnimationStart = true;
-
-// };
-
-// - - - - - - - - - - - * sprites * - - - - - - - - - - -\\
-
-
-
 // - - - - - - - - - - - * keyboard * - - - - - - - - - - -\\
 
-// var space = keyboard(32);
+var dollars = 100;
+var keyNumber = 0;
 
-// function keyboard(keyCode) {
-//   var key = {};
-//   key.code = keyCode;
-//   key.isDown = false;
-//   key.isUp = true;
-//   key.press = undefined;
-//   key.release = undefined;
-//   //The `downHandler`
-//   key.downHandler = function(event) {
-//     if (event.keyCode === key.code) {
-//       if (key.isUp && key.press) key.press();
-//       key.isDown = true;
-//       key.isUp = false;
-//     }
-//     event.preventDefault();
-//   };
+papers = []
 
-//   //The `upHandler`
-//   key.upHandler = function(event) {
-//     if (event.keyCode === key.code) {
-//       if (key.isDown && key.release) key.release();
-//       key.isDown = false;
-//       key.isUp = true;
-//     }
-//     event.preventDefault();
-//   };
-
-//   //Attach event listeners
-//   window.addEventListener(
-//     "keydown", key.downHandler.bind(key), false
-//   );
-//   window.addEventListener(
-//     "keyup", key.upHandler.bind(key), false
-//   );
-//   return key;
-// }
+var finished = true;
 
 function keyTyped() {
-	if (key === 'f') {
-		animHand.play();
-		animHand.goToAndStop = 0;
-		//animPaper.visible = false;
-		//animPaper.alpha = 0;
-		animHand.onComplete = function () {
-			leftPile.y += 4;
-		};
+	if (
+		key === 'f'
+		&& keyNumber === 0) {
+		 Fghj.style = { fontFamily: "tungsten", fontSize: 64, fill: "white" };
+		keyNumber++;
+		console.log("f 				" + keyNumber);
+	} else if (
+		key === 'g'
+		&& keyNumber === 1) {
+		fGhj.style = { fontFamily: "tungsten", fontSize: 64, fill: "white" };
+		keyNumber++;
+		console.log("f, g			" + keyNumber);
+	} else if (
+		key === 'h'
+		&& keyNumber === 2) {
+		fgHj.style = { fontFamily: "tungsten", fontSize: 64, fill: "white" };
+		keyNumber++;
+		console.log("f, g, h 		" + keyNumber);
+	}
+	else if (
+		key === 'j'
+		&& keyNumber === 3) {
+		fghJ.style = { fontFamily: "tungsten", fontSize: 64, fill: "white" };
+		keyNumber++;
+		console.log("f, g, h, j	" + keyNumber);
+		keyNumber = 0;
 
-		animPaper.play();
-		isAnimationStart = true;
+		dollarWasted();
 
 	}
+	else if (dollars === 0) {
+		console.log("YAY! NO MORE MONEY");
+		finished = true;
+	}
+};
+
+// function keyTyped() {
+// 	if (key === ' ') {
+
+// Fghj.style = { fontFamily: "tungsten", fontSize: 64, fill: "white" }
+
+// 		dollarWasted();
+// 	}
+// };
+
+function dollarWasted() {
+	dollars--;
+	console.log("$" + dollars + " left");
+
+	var xxx = new PIXI.extras.AnimatedSprite(paperFrames);
+	animHand.gotoAndPlay(0);
+	leftPile.y += 4;
+
+	animHand.onComplete = function () {
+		animHand.gotoAndStop(0);
+		Fghj.style = { fontFamily: "tungsten", fontSize: 64, fill: "gray" };
+		fGhj.style = { fontFamily: "tungsten", fontSize: 64, fill: "gray" };
+		fgHj.style = { fontFamily: "tungsten", fontSize: 64, fill: "gray" };
+		fghJ.style = { fontFamily: "tungsten", fontSize: 64, fill: "gray" };
+	};
+
+	xxx.gotoAndPlay(0);
+	xxx.x = 0;
+	xxx.y = -96;
+	xxx.animationSpeed = 0.25;
+	xxx.loop = false;
+	paperPile.addChild(xxx);
+	xxx.x += 10;
+	papers.push(xxx);
 };
