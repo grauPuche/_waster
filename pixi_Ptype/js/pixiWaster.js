@@ -210,7 +210,7 @@ function keyTyped() {
 		&& keyNumber === 3) {
 		fghJ.style = { fontFamily: "tungsten", fontSize: 64, fill: "white" };
 		keyNumber++;
-		console.log("f, g, h, j	" + keyNumber);
+		console.log("f, g, h, j " + keyNumber);
 		keyNumber = 0;
 
 		dollarWasted();
