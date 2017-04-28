@@ -109,7 +109,7 @@ function setup() {
 	);
 
 	dollarsLeft = new Text(
-		dollars,
+		"$" + dollars,
 		{ fontFamily: "tungsten", fontSize: 64, fill: "white" }
 	);
 
