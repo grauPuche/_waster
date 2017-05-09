@@ -48,29 +48,10 @@ var hand;
 var animHand;
 //var animPaper;
 var message;
-var fontName = 'Oswald';
-
 
 var paperFrames = [];
 var handFrames = [];
 
-window.onload = function()
-{
-	WebFont.load(
-	{
-		// this event is triggered when the fonts have been rendered, see https://github.com/typekit/webfontloader
-		active : function()
-		{
-			start();
-		},
-
-		// multiple fonts can be passed here
-		google :
-		{
-			families: [ fontName ]
-		}
-	});
-};
 
 // * * * * * * * * * * * * *  SETUP  * * * * * * * * * * * * * \\
 
@@ -110,28 +91,26 @@ function setup() {
 
 	console.log("setup: sprites set");
 
-	// - - - - - - - - - - - * text * - - - - - - - - - - -\\
-
 	Fghj = new Text(
 		"F",
-		{ fontFamily: "Oswald", fontSize: 64, fill: "gray" }
+		{ fontFamily: "Tahoma", fontSize: 64, fill: "gray" }
 	);
 	fGhj = new Text(
 		"G",
-		{ fontFamily: "Oswald", fontSize: 64, fill: "gray" }
+		{ fontFamily: "Tahoma", fontSize: 64, fill: "gray" }
 	);
 	fgHj = new Text(
 		"H",
-		{ fontFamily: "Oswald", fontSize: 64, fill: "gray" }
+		{ fontFamily: "Tahoma", fontSize: 64, fill: "gray" }
 	);
 	fghJ = new Text(
 		"J",
-		{ fontFamily: "Oswald", fontSize: 64, fill: "gray" }
+		{ fontFamily: "Tahoma", fontSize: 64, fill: "gray" }
 	);
 
 	dollarsLeft = new Text(
 		"$" + dollars,
-		{ fontFamily: "Oswald", fontSize: 64, fill: "white" }
+		{ fontFamily: "Tahoma", fontSize: 54, fill: "white" }
 	);
 
 	// - - - - - - - - - - - * position * - - - - - - - - - - -\\
@@ -148,11 +127,11 @@ function setup() {
 	paperPile.x = 375;
 	paperPile.y = 400;
 
-	Fghj.position.set(50, 50);
+	Fghj.position.set(60, 50);
 	fGhj.position.set(100, 50);
 	fgHj.position.set(150, 50);
 	fghJ.position.set(200, 50);
-	dollarsLeft.position.set(260,700);
+	dollarsLeft.position.set(200,670);
 	console.log("setup: position done");
 
 	// - - - - - - - - * adding to the stage * - - - - - - - -\\
@@ -182,7 +161,7 @@ function gameLoop() {
 
 	requestAnimationFrame(gameLoop);
 
-	dollarsLeft.text = '$' + dollars;
+	dollarsLeft.text = "$" + dollars;
 
 	if (papers.length > 0) {
 		for (var i = 0; i < papers.length; i++) {
@@ -210,28 +189,28 @@ function keyTyped() {
 	if (
 		key === 'f'
 		&& keyNumber === 0) {
-		 Fghj.style = { fontFamily: "Oswald", fontSize: 64, fill: "white" };
+		 Fghj.style = { fontFamily: "Tahoma", fontSize: 64, fill: "white" };
 		keyNumber++;
 		console.log("f 				" + keyNumber);
 	} else if (
 		key === 'g'
 		&& keyNumber === 1) {
-		fGhj.style = { fontFamily: "Oswald", fontSize: 64, fill: "white" };
+		fGhj.style = { fontFamily: "Tahoma", fontSize: 64, fill: "white" };
 		keyNumber++;
 		console.log("f, g			" + keyNumber);
 	} else if (
 		key === 'h'
 		&& keyNumber === 2) {
-		fgHj.style = { fontFamily: "Oswald", fontSize: 64, fill: "white" };
+		fgHj.style = { fontFamily: "Tahoma", fontSize: 64, fill: "white" };
 		keyNumber++;
 		console.log("f, g, h 		" + keyNumber);
 	}
 	else if (
 		key === 'j'
 		&& keyNumber === 3) {
-		fghJ.style = { fontFamily: "Oswald", fontSize: 64, fill: "white" };
+		fghJ.style = { fontFamily: "Tahoma", fontSize: 64, fill: "white" };
 		keyNumber++;
-		console.log("f, g, h, j " + keyNumber);
+		console.log("f, g, h, j " 	+ keyNumber);
 		keyNumber = 0;
 
 		dollarWasted();
@@ -246,7 +225,7 @@ function keyTyped() {
 // function keyTyped() {
 // 	if (key === ' ') {
 
-// Fghj.style = { fontFamily: "Oswald", fontSize: 64, fill: "white" }
+// Fghj.style = { fontFamily: "Tahoma", fontSize: 64, fill: "white" }
 
 // 		dollarWasted();
 // 	}
@@ -262,10 +241,10 @@ function dollarWasted() {
 
 	animHand.onComplete = function () {
 		animHand.gotoAndStop(0);
-		Fghj.style = { fontFamily: "Oswald", fontSize: 64, fill: "gray" };
-		fGhj.style = { fontFamily: "Oswald", fontSize: 64, fill: "gray" };
-		fgHj.style = { fontFamily: "Oswald", fontSize: 64, fill: "gray" };
-		fghJ.style = { fontFamily: "Oswald", fontSize: 64, fill: "gray" };
+		Fghj.style = { fontFamily: "Tahoma", fontSize: 64, fill: "gray" };
+		fGhj.style = { fontFamily: "Tahoma", fontSize: 64, fill: "gray" };
+		fgHj.style = { fontFamily: "Tahoma", fontSize: 64, fill: "gray" };
+		fghJ.style = { fontFamily: "Tahoma", fontSize: 64, fill: "gray" };
 	};
 
 	xxx.gotoAndPlay(0);
