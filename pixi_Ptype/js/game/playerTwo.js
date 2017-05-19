@@ -3,63 +3,46 @@
 var dollars2 = 100;
 var keyNumber2 = 0;
 
-papers2 = [];
+papers2 = []
 
-var finished2 = true;
+var finished2 = false;
 var ready2 = false;
 var winner2 = false;
 
-// function playerTwo() {
-// 	if (keyNumber2 === 0) {
-// 		keyNumber2++;
-// 		console.log("P2: f 				" + keyNumber);
-// 	} else if (keyNumber2 === 1) {
-// 		keyNumber2++;
-// 		console.log("P2: f, g			" + keyNumber);
-// 	} else if (keyNumber2 === 2) {
-// 		keyNumber2++;
-// 		console.log("P2: f, g, h 		" + keyNumber);
-// 	}
-// 	else if (keyNumber2 === 3) {
-// 		keyNumber2++;
-// 		console.log("P2: f, g, h, j " 	+ keyNumber);
-// 		keyNumber2 = 0;
+
+// function keyTyped() {
+// 	if (key === ' ') {
+
+// Fghj.style = { fontFamily: "Serif", fontSize: 64, fill: "white" }
 
 // 		dollarWasted();
-
-// 	}
-// 	else if (dollars2 === 0) {
-// 		console.log("P2: YAY! NO MORE MONEY");
-// 		finished2 = true;
-// 		rightPile.y += 4;
-// 	}
-// };
-
-// function keyTypedd() {
-// 	if (key === ' ') {
-// 		dollarWasted2();
 // 	}
 // };
 
 function dollarWasted2() {
-	dollars2--;
+	dollars2-=2;
 
 	var xxx = new PIXI.extras.AnimatedSprite(paperFrames);
 
-	if (dollars2 < 0) {
-		console.log("P2: YAY! NO MORE MONEY");
+	if (dollars2 === 0) {
+		console.log("P1: YAY! NO MORE MONEY");
+		// rightPile.y -= 4;
+		// xxx.visible = false;
+		// dollars++;
 		finished2 = true;
-		rightPile.y -= 4;
-		xxx.visible = false;
-		dollars2++;
+		winner2 = true;
 	};
-	console.log("P2: $" + dollars2 + " left");
+	console.log("P1: $" + dollars2 + " left");
 
 	animHand2.gotoAndPlay(0);
-	rightPile.y += 4;
+	rightPile.y += 19.2;
 
 	animHand2.onComplete = function () {
 		animHand2.gotoAndStop(0);
+		Fghj2.style = { fontFamily: "Serif", fontSize: 200, fill: "gray" };
+		fGhj2.style = { fontFamily: "Serif", fontSize: 200, fill: "gray" };
+		fgHj2.style = { fontFamily: "Serif", fontSize: 200, fill: "gray" };
+		fghJ2.style = { fontFamily: "Serif", fontSize: 200, fill: "gray" };
 	};
 
 	xxx.gotoAndPlay(0);
