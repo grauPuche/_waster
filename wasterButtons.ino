@@ -1,7 +1,3 @@
-//save this as a .ino file to be able to use it
-
-
-
 #include <Keyboard.h>
 
 char ctrlKey = KEY_LEFT_GUI;
