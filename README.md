@@ -4,7 +4,7 @@ an *html multiplayer game* where the user has to empty a pile of paper before ot
 
 ## SS17
 
-This Branch is the code used for the 2017 Spring Show at ITP. It is made to fit a group of characteristics unique to the setting. If you want to see how that went, check out my [blog post](http://blog.graupuche.info/_projects/2017/05/19/035.html) about it, It has an explaner about everything, including the physical controllers and videos of the show.
+This Branch is the code used for the 2017 Spring Show at ITP. It is made to fit a group of characteristics unique to the setting. If you want to see how that went, check out my [blog post](http://blog.graupuche.info/_projects/2017/05/19/035.html) about it, It has an explainer about everything, including the physical controllers and videos of the show.
 
 ### Status may 17
 
