@@ -1,0 +1,11 @@
+/*@font-face {
+    font-family: "Oswald";
+    src: url(tungFont.otf) format('opentype');
+}*/
+
+.logo{
+    position: absolute;
+    margin-left: 335.5px;
+    margin-right: 335.5px;
+    margin-top: 200px;
+}
